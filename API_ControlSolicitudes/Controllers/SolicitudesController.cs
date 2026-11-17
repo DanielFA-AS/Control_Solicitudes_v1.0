@@ -19,9 +19,31 @@ namespace API_ControlSolicitudes.Controllers
         [HttpGet]
         public async Task<IActionResult> ObtenerTodas()
         {
-            // Consulta a la base de datos.
+            var solicitudTodas = await _context.Solicituds
+            .FromSql($"EXECUTE dbo.ConsultaTodasSolicitudes")
+            .ToListAsync();
+            return Ok(solicitudTodas);
+        }
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> ObtenerPorId(int id)
+        {
+            var solicitudID = await _context.Solicituds
+            .FromSql($"EXECUTE dbo.ConsultaPorID @Id={id}")
+            .ToListAsync();
+            if (solicitudID.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(solicitudID.First());
+        }
 
-            // Retornar resultado.
+        [HttpGet("estado/{id:int}")]
+        public async Task<IActionResult> ObtenerPorEstado(int id)
+        {
+            var solicitudEstado = await _context.Solicituds
+            .FromSql($"EXECUTE dbo.ConsultaPorEstado @Estado={id}")
+            .ToListAsync();
+            return Ok(solicitudEstado);
         }
     }
 }
