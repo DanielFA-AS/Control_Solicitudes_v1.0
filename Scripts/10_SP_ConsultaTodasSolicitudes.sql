@@ -1,0 +1,10 @@
+
+CREATE OR ALTER PROCEDURE dbo.ConsultaTodasSolicitudes
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT *
+    FROM SOLICITUD;
+END;
+GO

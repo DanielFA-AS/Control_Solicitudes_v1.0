@@ -1,0 +1,12 @@
+
+CREATE OR ALTER PROCEDURE dbo.ConsultaPorID
+    @Id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT *
+    FROM SOLICITUD
+    WHERE Id = @Id;
+END;
+GO

@@ -1,0 +1,13 @@
+
+CREATE OR ALTER PROCEDURE dbo.ConsultaHistorial
+    @Id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT *
+    FROM HISTORIAL_TRAZABILIDAD
+    WHERE FK_Solicitud = @Id
+ORDER BY FechaHora ASC;;
+END;
+GO
